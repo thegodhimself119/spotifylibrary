@@ -115,8 +115,7 @@ public static class  spotify
                 songname = songname + trackName + " " + artists[k]["name"];
 
             }
-            //SearchYoutube(songname,DirectoryOfYt);
-            Console.WriteLine(songname);
+            SearchYoutube(songname,DirectoryOfYt);
 
 
         }
