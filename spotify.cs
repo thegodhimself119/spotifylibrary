@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace spotifylibrary;
 
-public class spotify
+public static class  spotify
 {
 
     public static void SearchYoutube(String SongName,String Directory)
@@ -18,7 +18,7 @@ public class spotify
                 FileName = @"C:\\Windows\\system32\\cmd.exe",
                 WorkingDirectory =@$"{Directory}",
                 Arguments = $"/C yt-dlp.exe ytsearch:{SongName} --no-playlist --extract-audio --audio-format mp3",
-                CreateNoWindow = true
+                CreateNoWindow = false
 
 
             }
@@ -44,10 +44,22 @@ public class spotify
     }
 
 
-    public static String ProcessUrl(String url)
+    public static String ProcessUrlSpotify(this String url, String type)
     {
-
-        string spotlink = "https://open.spotify.com/playlist/";
+        String spotlink = "";
+        if (type == "playlist")
+        {
+             spotlink = "https://open.spotify.com/playlist/";
+        }
+        else if (type == "album")
+        {
+            spotlink = "https://open.spotify.com/album/";
+        }
+        else if (type =="song"|| type == "track")
+        {
+            spotlink = "https://open.spotify.com/track/";
+        }
+       
         if (url.Contains(spotlink) == true && url.Contains("?"))
         {
 
@@ -103,8 +115,8 @@ public class spotify
                 songname = songname + trackName + " " + artists[k]["name"];
 
             }
-            SearchYoutube(songname,DirectoryOfYt);
-        
+            //SearchYoutube(songname,DirectoryOfYt);
+            Console.WriteLine(songname);
 
 
         }
